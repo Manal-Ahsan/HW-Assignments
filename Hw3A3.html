@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <body>
+
+        
+        <script>
+            //Task 1
+            let age=prompt("Enter Your Age");
+         let myage = Number(age);
+         let message;
+
+         if (myage >= 21){ message="You are Allowed to enter the venue and you can purchase alcohol";}
+         else if(myage>=19) { message = "You are Allowed to enter venue but you can not purchase alcohol";}
+         else{message = "You are not allowed to enter the Venue";}
+        console.log(message);
+        alert(message);
+
+        //Task 2 (Age Calculator)
+        let birthYear = prompt("Enter your birthyear:");
+        let yourbirthYear = Number(birthYear);
+        let currentYear = new Date().getFullYear();
+        let age1 = currentYear - yourbirthYear;
+        console.log("Your age is: " + age1);
+        alert("Your age is: " + age1);
+
+
+        //Task 3 
+        //Take a mathematical expression from user and calculate it and show the result hint: use Math.eval()
+
+       function evaluateuserinput(expression) {
+        return eval(expression);
+       }let userInput = prompt("Enter a mathematical expression:");
+      if (userInput !== null) { 
+      let result;
+      try { result = evaluateuserinput(userInput);
+        if (isFinite(result)) {console.log("Result:", result);
+        } else {
+            console.log("Error: Invalid Expression."); }
+      }catch (error) {
+        console.log("Error evaluating the expression:");
+    }
+}
+
+
+
+
+
+
+                  
+                  
+
+                
+
+         
+         
+                    
+
+               
+           
+      
+        </script>
+    </body>
+</html>
