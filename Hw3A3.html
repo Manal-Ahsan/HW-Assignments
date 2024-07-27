@@ -25,22 +25,15 @@
 
 
         //Task 3 
-        //Take a mathematical expression from user and calculate it and show the result hint: use Math.eval()
+        
+      let x = 10;
+      let y = 20;
+      let z = 30;
+      let text = prompt("Enter an equation");
+      let result = eval(text);
+    console.log("Result:", result);
 
-       function evaluateuserinput(expression) {
-        return eval(expression);
-       }let userInput = prompt("Enter a mathematical expression:");
-      if (userInput !== null) { 
-      let result;
-      try { result = evaluateuserinput(userInput);
-        if (isFinite(result)) {console.log("Result:", result);
-        } else {
-            console.log("Error: Invalid Expression."); }
-      }catch (error) {
-        console.log("Error evaluating the expression:");
-    }
-}
-
+        
 
 
 
