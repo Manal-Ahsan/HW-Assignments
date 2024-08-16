@@ -1,0 +1,31 @@
+<html>
+    <head>
+        <style>
+            #carouseldiv {
+                width: 100%;
+                height: 400px;
+                background-size: cover;
+                background-position: center;
+            }
+        </style>
+    </head>
+    <body>
+<div id="carouseldiv"></div>
+    </body>
+    <script>
+const imgs = ["./Images/img1.jpg","./Images/img2.jpg","./Images/img3.jfif"];
+let currentIndex = 0;
+
+function toggleCarousels() {
+    const carouselDiv = document.querySelector("#carouseldiv");
+    carouselDiv.style.backgroundImage = `url(${imgs[currentIndex]})`;
+    currentIndex++;
+    if (currentIndex >= imgs.length) {
+        currentIndex = 0;
+    }
+    setTimeout(toggleCarousels, 5000);
+}
+toggleCarousels();
+
+    </script>
+</html>

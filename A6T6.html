@@ -1,0 +1,202 @@
+<html>
+    <head>
+        <style>
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f8ff;
+    text-align: center;
+}
+nav {
+    background-color: hsl(315, 100%, 64%);
+    padding: 10px;
+    margin-bottom: 20px;
+}
+nav button {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 10px 20px;
+    margin: 0 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+nav button:hover {
+    background-color: #ff4500;
+    color: #fff;
+}
+.view {
+    display: none;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    max-width: 600px;
+}
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+form label {
+    margin: 10px 0 5px;
+}
+form input {
+    margin: 5px 0 15px;
+    padding: 10px;
+    width: 100%;
+    max-width: 300px;
+    border: 1px solid #ddd;
+}
+form button {
+    padding: 10px 20px;
+    background-color: #32cd32;
+    border: 1px solid #28a745;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+}
+form button:hover {
+    background-color: #28a745;
+}
+h1 {
+    color: #333;
+}
+button:focus {
+    outline: none;
+}
+  </style>
+    </head>
+    <body>
+        <div id="app">
+            <nav>
+                <button onclick="showView('home')">Home</button>
+                <button onclick="showView('post')">Post Tweet</button>
+                <button onclick="showView('delete')">Delete Tweet</button>
+                <button onclick="showView('update')">Update Tweet</button>
+            </nav>
+            <div id="home" class="view">
+                <h1>Saved Tweets</h1>
+                <div id="tweets-container"></div>
+            </div>
+            <div id="post" class="view" style="display: none;">
+                <h1>Post New Tweet</h1>
+    <form id="post-form">
+            <label for="tweetImage">Tweet Image URL:</label>
+        <input type="text" id="tweetImage" required>
+        <label for="tweetDescription">Tweet Description:</label>
+          <input type="text" id="tweetDescription" required>
+                    <button type="submit">Save Tweet</button>
+                </form>
+            </div>
+            <div id="delete" class="view" style="display: none;">
+                <h1>Delete Tweet</h1>
+                <form id="delete-form">
+          <label for="tweetIdDelete">Tweet ID:</label>
+          <input type="text" id="tweetIdDelete" required>
+          <button type="submit">Delete Tweet</button>
+                </form>
+            </div>
+            <div id="update" class="view" style="display: none;">
+                <h1>Update Tweet</h1>
+                <form id="update-form">
+             <label for="tweetIdUpdate">Tweet ID:</label>
+             <input type="text" id="tweetIdUpdate" required>
+             <label for="tweetDescriptionUpdate">Tweet Description:</label>
+             <input type="text" id="tweetDescriptionUpdate">
+            <button type="submit">Update Tweet</button>
+                </form>
+            </div>
+        </div>
+
+    </body>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            showView('home');
+            fetchTweets();
+            document.getElementById('post-form').addEventListener('submit', handlePostTweet);
+            document.getElementById('delete-form').addEventListener('submit', handleDeleteTweet);
+            document.getElementById('update-form').addEventListener('submit', handleUpdateTweet);
+        });
+        
+        function showView(viewId) {
+            document.querySelectorAll('.view').forEach(view => {
+                view.style.display = view.id === viewId ? 'block' : 'none';
+            });
+        }
+        function fetchTweets() {
+            fetch('https://p2pclouds.up.railway.app/v1/learn/get_instagram_posts')
+           .then(response => response.json())
+            .then(data => {
+                    const container = document.getElementById('tweets-container');
+                    container.innerHTML = '';
+          if (data.tweets && Array.isArray(data.tweets)) {
+                        data.tweets.forEach(tweet => {
+                            container.innerHTML += `
+             <div>
+                   <p>${tweet.tweetDescription}</p>
+                 <img src="${tweet.tweetImage}" alt="Tweet Image" style="width: 100px; height: auto;">
+                  <hr>
+                </div>  `;
+              }); } else {
+                        container.innerHTML = '<p>No tweets available.</p>';
+                    }
+                }); }        
+         
+         function handlePostTweet(event) {
+            event.preventDefault();
+            const tweetImage = document.getElementById('tweetImage').value;
+            const tweetDescription = document.getElementById('tweetDescription').value;
+        
+            fetch('https://p2pclouds.up.railway.app/v1/learn/tweet/save', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ tweetImage, tweetDescription })
+            })
+            .then(response => response.json())
+            .then(() => {
+                alert('Tweet saved successfully!');
+                fetchTweets();
+                showView('home');
+            })
+            .catch(error => console.error('Error saving tweet:', error));
+        }
+        
+        function handleDeleteTweet(event) {
+            event.preventDefault();
+            const tweetId = document.getElementById('tweetIdDelete').value;
+        
+            fetch('https://p2pclouds.up.railway.app/v1/learn/tweet/delete', {
+                method: 'DELETE',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ tweetId })
+            })
+            .then(response => response.json())
+            .then(() => {
+                alert('Tweet deleted successfully!');
+                fetchTweets();
+                showView('home');
+            })
+            .catch(error => console.error('Error deleting tweet:', error));
+        }
+        
+        function handleUpdateTweet(event) {
+            event.preventDefault();
+            const tweetId = document.getElementById('tweetIdUpdate').value;
+            const tweetDescription = document.getElementById('tweetDescriptionUpdate').value;
+        
+            fetch('https://p2pclouds.up.railway.app/v1/learn/tweet/update', {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ tweetId, tweetDescription })
+            })
+            .then(response => response.json())
+            .then(() => {
+                alert('Tweet updated successfully!');
+                fetchTweets();
+                showView('home');
+            })
+            .catch(error => console.error('Error updating tweet:', error));
+        } 
+    </script>
+</html>
