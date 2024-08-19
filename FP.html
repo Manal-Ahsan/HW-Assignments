@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text-to-Speech Website</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .custom-modal-content {
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center">Text-to-Speech Example</h1>
+        <div class="row mt-4">
+            <div class="col-md-6 offset-md-3">
+                <div class="list-group">
+                    <button class="list-group-item list-group-item-action" onclick="speakText('Hello, welcome to our website!')">Hello, welcome to our website!</button>
+                    <button class="list-group-item list-group-item-action" onclick="speakText('This is an example of text-to-speech functionality.')">This is an example of text-to-speech functionality.</button>
+                    <button class="list-group-item list-group-item-action" onclick="speakText('Feel free to explore and use the modal component as well.')">Feel free to explore and use the modal component as well.</button>
+                </div>
+                <button class="btn btn-primary mt-3" data-toggle="modal" data-target="#customModal">Open Modal</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="customModal" tabindex="-1" role="dialog" aria-labelledby="customModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content custom-modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="customModalLabel">Custom Modal</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    This is a custom modal. You can put any content here.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- Text-to-Speech Script -->
+    <script>
+        function speakText(text) {
+            const synth = window.speechSynthesis;
+            const utterance = new SpeechSynthesisUtterance(text);
+            synth.speak(utterance);
+        }
+    </script>
+    <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Text-to-Speech</title>
+  </head>
+  <body>
+    <h1>Text-to-Speech</h1>
+    <textarea
+      id="text"
+      rows="5"
+      cols="30"
+      placeholder="Enter text here"
+    ></textarea>
+    <br />
+    <button onclick="speak()">Speak</button>
+  </body>
+</html>
+js SNIPPET
+<script>
+        function speak() {
+            const text = document.getElementById('text').value;
+            const utterance = new SpeechSynthesisUtterance(text);
+            window.speechSynthesis.speak(utterance);
+        }
+    </script>
+</body>
+</html>

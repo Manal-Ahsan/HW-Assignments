@@ -1,0 +1,313 @@
+<html>
+    <head>
+        <style>
+body, h1, p {
+    margin: 0;
+    padding: 0;
+}
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+}
+header {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+    text-align: center;
+}
+main {
+    padding: 20px;
+}
+footer {
+    background-color: #f1f1f1;
+    text-align: center;
+    padding: 10px;
+    position: static;
+}
+
+.container {
+    width: 300px;
+    height: 300px;
+    border: 2px solid #000;
+    position: relative;
+    padding: 10px;
+    box-sizing: border-box;
+}
+.box {
+    width: 100px;
+    height: 100px;
+    background-color: #4CAF50;
+    color: white;
+    text-align: center;
+    line-height: 100px;
+    position: relative; 
+    top: 20px; 
+    left: 30px;
+}
+.ccontainer {
+    width: 300px;
+    height: 300px;
+    border: 2px solid #000;
+    position: relative;
+    padding: 10px;
+    box-sizing: border-box;
+}
+.bbox {
+    width: 100px;
+    height: 100px;
+    background-color: #4CAF50;
+    color: white;
+    text-align: center;
+    line-height: 100px;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+.ccontainer {
+    display: flex;
+    margin: 20px;
+}
+.sidebar {
+    width: 200px;
+    background-color: #d6d18e;
+    padding: 20px;
+    margin-right: 20px;
+    position: sticky;
+    top: 0;
+}
+
+.sidebar h2 {
+    margin-top: 0;
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    margin-bottom: 10px;
+}
+
+.sidebar ul li a {
+    text-decoration: none;
+    color: #333;
+}
+.content {
+    flex: 1;
+}
+
+section {
+    padding: 20px;
+    margin-bottom: 20px;
+    background-color: hsl(157, 60%, 75%);
+    border: 1px solid #ddd;
+}
+
+section h2 {
+    margin-top: 0;
+}
+.flexbox {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+}
+.flex-container {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    gap: 20px;
+}
+
+.boox {
+    flex: 1;
+    background-color: hsl(318, 78%, 57%);
+    color: white;
+    padding: 90px;
+    text-align: center;
+    border-radius: 5px;
+}.flex-ccontainer {
+    display: flex;
+    flex-direction: column; /* Arrange the boxes in a vertical column */
+    justify-content: center; /* Center the boxes vertically within the container */
+    align-items: center; /* Center the boxes horizontally within the container */
+    width: 200px; /* Width of the container */
+    height: 300px; /* Height of the container */
+    background-color: #ffffff;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+/* Box styling */
+.boxx {
+    background-color: #6fdd20;
+    color: white;
+    padding: 20px;
+    margin-bottom: 10px;
+    text-align: center;
+    width: 100%; 
+    border-radius: 5px;
+}
+
+.boxx:last-child {
+    margin-bottom: 0;
+}
+.con {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+}
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);  
+    gap: 20px; 
+    width: 80%;
+    max-width: 500px;
+}
+.grid-item {
+    background-color: #c0dd75;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    border-radius: 5px;
+}
+.mon {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.site-header,
+.site-footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #7dbe69;
+    color: white;
+}
+
+.site-content {
+    padding: 20px;
+    text-align: center;
+}
+@media (max-width: 768px) {
+    .site-header {
+        background-color: #f0b967;
+    }
+
+    .site-footer {
+        background-color: #FF9800; 
+    }
+}
+@media (max-width: 1024px) {
+    .site-header {
+        background-color: #883d75;
+    }
+ .site-footer {
+        background-color: #3dbe6f;
+    }}
+ </style>
+    </head>
+    <body>
+        <h2>static Position</h2>
+        <header>
+            <h1>Header</h1>
+        </header>
+     <p>This is where the main content of the page will go. It follows the normal document
+         flowThis is where the main content of the page will go. It follows the normal document 
+         flowThis is where the main content of the page will go. It follows the normal document flow
+         flowThis is where the main content of the page will go. It follows the normal document 
+         flowThis is where the main content of the page will go.</p>
+        <footer>
+            <p>Footer</p>
+        </footer>
+<br><br>
+        <h2>Relative Position</h2>
+        <div class="container">
+            <div class="box">Box</div>
+        </div>
+        <br><br>
+        <h2>Absolute Position</h2>  
+        <div class="ccontainer">
+            <div class="bbox">Box</div>
+        </div>
+        <br><br>
+        <h2>Sticky Position</h2>
+    <div class="cccontainer"></div>
+        <aside class="sidebar">
+            <h2>Sidebar</h2>
+            <ul>
+                <li><a href="#section1">Section 1</a></li>
+                <li><a href="#section2">Section 2</a></li>
+            
+            </ul>
+        </aside>
+        <div class="content">
+            <section id="section1">
+                <h2>Section 1</h2>
+                <p>This is content for section 1.</p>
+            </section>
+            <section id="section2">
+                <h2>Section 2</h2>
+                <p>This is content for section 2.</p>
+            </section>
+        </div>
+    </div>
+    <br>
+
+<h2>Flexbox Container</h2>
+<div class="flexbox">
+<div class="flex-container">
+    <div class="boox">Box 1</div>
+    <div class="boox">Box 2</div>
+    <div class="boox">Box 3</div>
+  </div></div> 
+  <br />
+  <div class="flexbox2">
+  <div class="flex-ccontainer">
+    <div class="boxx">Box 1</div>
+    <div class="boxx">Box 2</div>
+    <div class="boxx">Box 3</div>
+</div></div>
+<br>
+<h2>Grid layout</h2>
+<div class="con">
+<div class="grid-container">
+    <div class="grid-item">Box 1</div>
+    <div class="grid-item">Box 2</div>
+    <div class="grid-item">Box 3</div>
+    <div class="grid-item">Box 4</div>
+</div>
+</div>
+<h2>Changing Colors</h2>
+<div class="mon">
+<header class="site-header">
+    <h1>Header</h1>
+</header>
+<main class="site-content">
+    <p>This is the main content area. Resize the browser window to see the background color of the header and footer change.</p>
+</main>
+
+<footer class="site-footer">
+    <p>Footer</p>
+</footer></div>
+    </body>
+    <script>
+
+    </script>
+</html>
