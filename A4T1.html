@@ -15,6 +15,18 @@
    <button onclick="totalsum()" >Submit</button>
    <ul id="resultList"></ul>
 
-        <script src="./JS1.js"></script>
+        <script>
+            function totalsum(){
+                let sum =0;
+                for(i=0;i<10;i++){
+                const value = Number(document.getElementById(`input${i}`).value );
+                if(!isNaN(value)){
+                    sum +=value;}}
+                    const result = document.getElementById("result");
+                    const listItem = document.createElement('li');
+                    listItem.textContent = `Sum: ${sum}`;
+                    resultList.appendChild(listItem);
+                  }
+        </script>
     </body>
 </html>
