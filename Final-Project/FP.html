@@ -1,0 +1,296 @@
+<html>
+  <head>
+    <style>
+      @import/*google url for fonts*/ url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400&display=swap');
+
+* {
+    box-sizing:/*adding border box*/ border-box;
+}
+body {
+  /*targetting body*/
+    background: rgb(243, 224, 228);
+    font-family: 'arial', monospace;
+    color: #333;
+}
+.container {
+    margin: auto;
+    padding: 19px;
+    max-width: 1199px;
+}
+h1 {
+    text-align: center;
+    font-family: 'Playfair Display', serif;
+    color: #4a4a4a;
+    margin-bottom: 30px;
+}
+.btn {
+    cursor: pointer;
+    /*button colors*/
+    background: #e0a6b0;
+    border-radius: 6px;
+    color:white;
+    font-size: 15px;
+    padding: 9.5px 19.5px;
+    transition: background 0.3s, transform 0.2s;
+}
+.btn:hover {
+  /*button hover effect*/
+    background: #e07f8c;
+}
+.btn:active {
+  /*adding scale*/
+    transform: scale(1);
+}
+.toggle-btn {
+    display: block;
+    margin: auto 0 25px;
+}
+.custom-text {
+  /*custom text*/
+    position: absolute;
+    top: 19%;
+    left: 49%;
+    transform: translate(-49%, -999px);
+    background: #fef2f7;
+    padding: 19px;
+    border-radius: 9.5px;
+    box-shadow: 0 4px 8px black;
+    transition: transform 1s;
+}
+.custom-text.show {
+  /*transform*/
+    transform: translate(-50%, 0);
+}
+.custom-text select,/*targeting text area*/ .custom-text textarea {
+    border: 1.5px solid #e0a9bb;
+    border-radius: 4.5px;
+    font-size: 16px;
+    width: 100%;
+}
+.custom-text select {
+  /*custom text color*/
+    background: rgb(228, 172, 181);
+    height: 35px;
+    padding: 5px;
+}
+.custom-text textarea {
+    background: white;
+    padding: 9.5px;
+    margin: 14.5px 0;
+    height: 199px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.custom-text .btn {
+  /*adding width*/
+    width: 100%;
+}
+.custom-text .close/*cursor point*/ {
+    float: right;
+    cursor: pointer;
+}
+main /*targeting main grid*/{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 19px;
+}
+.box {
+    border-radius:/*border radius*/ 9px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    box-shadow: 0.1 4px 8px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s;
+}
+.box:hover /*after hover effect*/{
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+.box img {
+    width:/*img targeting*/ 100%;
+    height: 199px;
+    object-fit: cover;
+}
+.box .imageInfo {
+    background: pink;
+    color: rgb(116, 116, 116);
+    font-size: 15px;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    padding: 9px;
+    text-align: center;
+    border-top: 1.1px solid #d6a1b2;
+}/*Adding conditions*/
+@media (max-width: 1099px) {
+    main {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+@media (max-width: 799px) {
+    main {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+@media (max-width: 499px) {
+    main {
+        grid-template-columns: 1fr;
+    }
+}
+
+    </style>
+   </head>
+   <!--html-->
+    <body>
+    <div class="container">
+      <!--main heading-->
+      <h1>Web Speech</h1><!--toggle button-->
+      <button class="btn toggle-btn" id="toggle">
+       Toggle Custom Text
+      </button>
+      <div class="custom-text" id="custom-text">
+      <div class="close" id="close">X</div>
+      <h3>Change Voice</h3>
+       <select id="voices"></select>
+     <textarea id="text" placeholder="Write any text"></textarea>
+          <button class="btn" id="read">Read Custom Text</button>
+      </div>
+      <main id="main"></main>
+   </div>
+    </body>
+   <script>
+    //now get elements
+    const main = document.getElementById("main");
+    const voiceSelect = document.getElementById("voices");
+   const toggleBtn = document.getElementById("toggle");
+   const closeBtn = document.getElementById("close");
+    const customText = document.getElementById("text");
+   const readBtn = document.getElementById("read");
+    const customTextDiv = document.getElementById("custom-text");
+//main array for pictures
+ const data = [
+  {
+    image: "angry.png",
+    text: "I'm Angry",
+  },
+  {
+    image: "tthirsty.png",
+    text: "I'm Thirsty",
+  },
+  {
+    image: "hungry.png",
+    text: "I'm Hungry",
+  },
+  {
+    image: "dadi.png",
+    text: "I want to go to Grandma's",
+  },
+  {
+    image: "happy.png",
+    text: "I'm Happy",
+  },
+  {
+    image: "granmma.png",
+    text: "I Want to go Home",
+  },
+  {
+    image: "hurt.png",
+    text: "I'm Hurt",
+  },
+  {
+    image: "outside.png",
+    text: "I Want to go Outside",
+  },
+  {
+    image: "sad.png",
+    text: "I'm Sad",
+  },
+  {
+    image: "scared.png",
+    text: "I'm Scared",
+  },
+  {
+    image: "school.png",
+    text: "I Want to go to School",
+  },
+  {
+    image: "tired.png",
+    text: "I'm Tired",
+  },
+];//target array
+let voicesBackup = [];
+data.forEach(createBox);
+//add function
+function createBox(imageObj) {
+  const box = document.createElement("div");
+  const { image, text } = imageObj;
+  box.classList.add("box");
+  //using innerhtml for adding images and text
+  box.innerHTML = ` <img src="${image}" alt="${text}" /> <p class="imageInfo">${text}</p>`;
+//add eventlistener
+  box.addEventListener("click", () => {
+    setMessage(text);
+    speakText();
+  });
+  main.appendChild(box);
+}
+
+const message = new SpeechSynthesisUtterance();
+//voicelist
+function populateVoiceList() {
+  if (typeof speechSynthesis === "undefined") {
+    return;
+  }
+//speechSynthesis
+  let voices = speechSynthesis.getVoices();
+  voicesBackup = voices;
+
+  for (var i = 0; i < voices.length; i++) {
+    var option = document.createElement("option");
+    option.textContent = voices[i].name + " (" + voices[i].lang + ")";
+//voice default
+    if (voices[i].default) {
+      option.textContent += " -- DEFAULT";
+    }
+
+    option.setAttribute("data-lang", voices[i].lang);
+    option.setAttribute("data-name", voices[i].name);
+    voiceSelect.appendChild(option);
+  }
+}//functions
+function setMessage(text) {
+  message.text = text;
+}
+
+function speakText() {
+  speechSynthesis.speak(message);
+}
+
+function setVoice(e) {
+  console.log(e.target.value);
+  message.voice = voicesBackup.find((voice) => voice.name === e.target.value);
+}
+//populatevoicelist
+populateVoiceList();
+if (
+  typeof speechSynthesis !== "undefined" &&
+  speechSynthesis.onvoiceschanged !== undefined
+) {
+  speechSynthesis.onvoiceschanged = populateVoiceList;
+}
+toggleBtn.addEventListener("click", () => {
+  customTextDiv.classList.toggle("show");
+});
+
+closeBtn.addEventListener("click", () => {
+  customTextDiv.classList.remove("show");
+});
+//addeventlistener
+speechSynthesis.addEventListener("voiceschanged", populateVoiceList);
+voiceSelect.addEventListener("change", setVoice);
+
+readBtn.addEventListener("click", () => {
+  setMessage(customText.value);
+  speakText();
+});
+ </script>
+
+</html>
